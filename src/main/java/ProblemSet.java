@@ -20,6 +20,7 @@ public class ProblemSet {
                 String domain;
                 Boolean secondEmailAddressExist = false;
 
+                //checking how many emails there are
                 System.out.print("Input two emails: ");
                 emailAddress = input.nextLine();
                 if (!(emailAddress.contains(", "))){
