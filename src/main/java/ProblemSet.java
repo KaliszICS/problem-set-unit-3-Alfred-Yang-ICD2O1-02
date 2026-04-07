@@ -3,7 +3,7 @@
         * File: Problem Set Unit 3 
         * Author: Alfred Yang
         * Date Created: March 30, 2026
-        * Date Last Modified: April ????????????????????????????, 2026
+        * Date Last Modified: April 7, 2026
         */
 import java.util.Scanner;
 public class ProblemSet {
@@ -76,10 +76,16 @@ public class ProblemSet {
                 domain = EmailAddress.substring(locationOfAtSymbol+1);
                 username = EmailAddress.substring(0, locationOfAtSymbol);
 
+                if (domain.endsWith("gmail.com")){
+                        username = username.replaceAll("\\+", "");
+                        username = username.replaceAll("\\_", "");
+                        username = username.replaceAll("\\.", "");
+                }
+
                 if (!(domain.contains("."))){
                         return "No dot in domain";
                 }
-                locationOfDotInDomain = domain.indexOf(".");
+                locationOfDotInDomain = domain.lastIndexOf(".");
                 domainSuffix = domain.substring(locationOfDotInDomain+1);
 
                 if (domain.contains("@") && username.contains("@")){
@@ -103,10 +109,10 @@ public class ProblemSet {
                 else if (domain.contains("+") || domain.contains("_")){
                         return "+ or _ in non local area";
                 }
-                else if (username.contains(".")){
+                else if (domain.endsWith("gmail.com")){
                         return "Valid (Gmail normalized)";
-                }
-                else{
+                }             
+                else {
                         return "Valid";
                 }
 }
