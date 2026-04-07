@@ -16,8 +16,7 @@ public class ProblemSet {
                 String emailAddress;        
                 String firstemailAddress;
                 String secondemailAddress;                                                                 ;
-                String firstEmailValidationMessage;
-                String secondEmailValidationMessage;
+                String emailValidationMessage;
                 String local;
                 String domain;
                 Boolean secondemailAddressExist = false;
@@ -27,41 +26,39 @@ public class ProblemSet {
                 emailAddress = input.nextLine();
                 if (!(emailAddress.contains(", "))){
                         firstemailAddress = emailAddress;
-                        secondemailAddress = null;
-                        secondEmailValidationMessage = null;
-                }
+                        secondemailAddress = null;                }
                 else { 
                         secondemailAddressExist = true;
                         secondemailAddress = emailAddress.substring(emailAddress.indexOf(", ") + 2);
                         firstemailAddress = emailAddress.substring(0, emailAddress.indexOf(", "));
                 }
-                
-                firstEmailValidationMessage = confirmingEmail(firstemailAddress);
-                if (firstEmailValidationMessage.startsWith("Valid")){
+                //first email validation
+                emailValidationMessage = confirmingEmail(firstemailAddress);
+                if (emailValidationMessage.startsWith("Valid")){
                         local = firstemailAddress.substring(0, firstemailAddress.indexOf("@"));
                         domain = firstemailAddress.substring(firstemailAddress.indexOf("@") + 1);
                         //output message for the first email when it's valid
-                        System.out.println(firstemailAddress + ": " + firstEmailValidationMessage + " | Local: " + local + " | Domain: " + domain);
+                        System.out.println(firstemailAddress + ": " + emailValidationMessage + " | Local: " + local + " | Domain: " + domain);
                 }
                 else{
                         //output message for the first email when it's invalid
-                        System.out.println(firstemailAddress + ": Invalid: " + firstEmailValidationMessage);
+                        System.out.println(firstemailAddress + ": Invalid: " + emailValidationMessage);
                 }
                 
                 if (!(secondemailAddressExist)){
                         return;
                 }
-                
-                secondEmailValidationMessage = confirmingEmail(secondemailAddress);
-                if (secondEmailValidationMessage.startsWith("Valid")){
+                //Second email validation
+                emailValidationMessage = confirmingEmail(secondemailAddress);
+                if (emailValidationMessage.startsWith("Valid")){
                         local = secondemailAddress.substring(0, secondemailAddress.indexOf("@"));
                         domain = secondemailAddress.substring(secondemailAddress.indexOf("@") + 1);
                         //output message for the second email when it's valid
-                        System.out.println(secondemailAddress + ": " + secondEmailValidationMessage + " | Local: " + local + " | Domain: " + domain);
+                        System.out.println(secondemailAddress + ": " + emailValidationMessage + " | Local: " + local + " | Domain: " + domain);
                 }
                 else{
                         //output message for the second email when it's invalid
-                        System.out.println(secondemailAddress + ": Invalid: " + secondEmailValidationMessage);
+                        System.out.println(secondemailAddress + ": Invalid: " + emailValidationMessage);
                 }
         }
         public static String confirmingEmail(String emailAddress){
