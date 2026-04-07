@@ -32,14 +32,14 @@ public class ProblemSet {
                 }
                 else { 
                         secondemailAddressExist = true;
-                        secondemailAddress = emailAddress.substring(emailAddress.indexOf(", ")+2);
+                        secondemailAddress = emailAddress.substring(emailAddress.indexOf(", ") + 2);
                         firstemailAddress = emailAddress.substring(0, emailAddress.indexOf(", "));
                 }
                 
                 firstEmailValidationMessage = confirmingEmail(firstemailAddress);
                 if (firstEmailValidationMessage.startsWith("Valid")){
                         local = firstemailAddress.substring(0, firstemailAddress.indexOf("@"));
-                        domain = firstemailAddress.substring(firstemailAddress.indexOf("@")+1);
+                        domain = firstemailAddress.substring(firstemailAddress.indexOf("@") + 1);
                         //output message for the first email when it's valid
                         System.out.println(firstemailAddress + ": " + firstEmailValidationMessage + " | Local: " + local + " | Domain: " + domain);
                 }
@@ -55,7 +55,7 @@ public class ProblemSet {
                 secondEmailValidationMessage = confirmingEmail(secondemailAddress);
                 if (secondEmailValidationMessage.startsWith("Valid")){
                         local = secondemailAddress.substring(0, secondemailAddress.indexOf("@"));
-                        domain = secondemailAddress.substring(secondemailAddress.indexOf("@")+1);
+                        domain = secondemailAddress.substring(secondemailAddress.indexOf("@") + 1);
                         //output message for the second email when it's valid
                         System.out.println(secondemailAddress + ": " + secondEmailValidationMessage + " | Local: " + local + " | Domain: " + domain);
                 }
