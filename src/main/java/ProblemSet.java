@@ -10,44 +10,70 @@ public class ProblemSet {
 
 
 	public static void main(String args[]){
-        Scanner input = new Scanner(System.in);
-        String emailAddress;
-        String emailValidationMessage;
+                Scanner input = new Scanner(System.in);
+                String emailAddress;        
+                String firstEmailAddress;
+                String secondEmailAddress;                                                                 ;
+                String firstEmailValidationMessage;
+                String secondEmailValidationMessage;
+                String local;
+                String domain;
+                Boolean secondEmailAddressExist = false;
 
-
-        System.out.print("Input an email: ");
-        emailAddress = input.nextLine();
-        emailValidationMessage = confirmingEmail(emailAddress);
-
-        if (emailValidationMessage.startsWith("Valid")){
-                System.out.println(emailValidationMessage);
+                System.out.print("Input two emails: ");
+                emailAddress = input.nextLine();
+                if (!(emailAddress.contains(", "))){
+                        firstEmailAddress = emailAddress;
+                        secondEmailAddress = null;
+                        secondEmailValidationMessage = null;
+                }
+                else { 
+                        secondEmailAddressExist = true;
+                        secondEmailAddress = emailAddress.substring(emailAddress.indexOf(", ")+2);
+                        firstEmailAddress = emailAddress.substring(0, emailAddress.indexOf(", "));
+                }
+                
+                firstEmailValidationMessage = confirmingEmail(firstEmailAddress);
+                if (firstEmailValidationMessage.startsWith("Valid")){
+                        local = firstEmailAddress.substring(0, firstEmailAddress.indexOf("@"));
+                        domain = firstEmailAddress.substring(firstEmailAddress.indexOf("@")+1);
+                        System.out.println(firstEmailAddress + ": " + firstEmailValidationMessage + " | Local: " + local + " | Domain: " + domain);
+                }
+                else{
+                        System.out.println(firstEmailAddress + ": Invalid: " + firstEmailValidationMessage);
+                }
+                
+                if (!(secondEmailAddressExist)){
+                        return;
+                }
+                
+                secondEmailValidationMessage = confirmingEmail(secondEmailAddress);
+                if (secondEmailValidationMessage.startsWith("Valid")){
+                        local = secondEmailAddress.substring(0, secondEmailAddress.indexOf("@"));
+                        domain = secondEmailAddress.substring(secondEmailAddress.indexOf("@")+1);
+                        System.out.println(secondEmailAddress + ": " + secondEmailValidationMessage + " | Local: " + local + " | Domain: " + domain);
+                }
+                else{
+                        System.out.println(secondEmailAddress + ": Invalid: " + secondEmailValidationMessage);
+                }
         }
-        else{
-                System.out.println("Invalid");
-                System.out.println(emailValidationMessage);
-        }
-
-        
-        }
-
-        public static String confirmingEmail(String emailAddress){
+        public static String confirmingEmail(String EmailAddress){
                 String domain;
                 String username;
                 String domainSuffix;
                 int locationOfAtSymbol;
                 int locationOfDotInDomain;
 
-        
-                if (!(emailAddress.contains("@"))){
+                if (!(EmailAddress.contains("@"))){
                         return "Missing @";
                 }
-                else if (!(emailAddress.contains("."))){
+                else if (!(EmailAddress.contains("."))){
                         return "Missing .";
                 }
 
-                locationOfAtSymbol = emailAddress.indexOf("@");
-                domain = emailAddress.substring(locationOfAtSymbol+1);
-                username = emailAddress.substring(0, locationOfAtSymbol);
+                locationOfAtSymbol = EmailAddress.indexOf("@");
+                domain = EmailAddress.substring(locationOfAtSymbol+1);
+                username = EmailAddress.substring(0, locationOfAtSymbol);
 
                 if (!(domain.contains("."))){
                         return "No dot in domain";
@@ -58,10 +84,10 @@ public class ProblemSet {
                 if (domain.contains("@") && username.contains("@")){
                         return "Multiple @";
                 }
-                else if (emailAddress.startsWith(".") && emailAddress.endsWith(".")){
+                else if (EmailAddress.startsWith(".") && EmailAddress.endsWith(".")){
                         return "Starts or ends with dot";
                 }
-                else if (emailAddress.contains(" ")){
+                else if (EmailAddress.contains(" ")){
                         return "Contains spaces";
                 }
                 else if (username.length() < 1){
@@ -76,22 +102,11 @@ public class ProblemSet {
                 else if (domain.contains("+") || domain.contains("_")){
                         return "+ or _ in non local area";
                 }
-                else if (domainSuffix.contains("1")){
-                        return "Domain extension contains non-letters";
-                }
                 else if (username.contains(".")){
                         return "Valid (Gmail normalized)";
                 }
                 else{
                         return "Valid";
                 }
-
-        
-
-
-
-
-
-
-}    
+}
 }
