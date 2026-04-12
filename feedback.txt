@@ -1,0 +1,12 @@
+K(30%): 100
+I(30%): 88
+C(10%): 100
+A(30%): 88
+92.8%
+
+Emails should not allow multiple @s
+Should not be able to start with a dot (unless gmail) (You used && instead of ||)
++ and _ should not be allowed at the start or end of email
+Should specify too long or too short for domain length when not correct length
+
+Otherwise great work Alfred
